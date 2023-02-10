@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "dep-graph"
+version = "0.1.0"
+description = "Dependency Graph Traversal Package"
+authors = ["Muhammad Hassan Ahmed"]
+readme = "README.md"
+packages = [{include = "dep_graph"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
