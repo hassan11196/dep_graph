@@ -1,3 +1,5 @@
+""" Tests for dep_graph module
+"""
 import os
 import json
 import unittest
@@ -9,7 +11,7 @@ BASE_PATH = os.path.dirname(os.path.abspath(__file__))
 
 class TestResolvedGraph(unittest.TestCase):
     """
-    Tests for dep_graph module
+    Tests for dep_graph module, to verify if the module generates a valid resolved dependency graph.
     """
 
     def test_resolved_graph_of_valid_deps_file(self):
