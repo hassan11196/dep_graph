@@ -22,6 +22,18 @@ Simple python package to generate dependency graph from given json file.
 
     python -m unittest discover tests/
 
+## Create package build wiih setup.py
+
+    python setup.py sdist bdist_wheel
+
+## Create Virtual Environment with poetry
+
+    poetry install
+
+## Create Build for package
+
+    poetry build
+
 ## install pre-commit hooks
 
     pre-commit install

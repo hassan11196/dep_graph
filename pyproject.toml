@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "dep-graph"
 version = "0.1.0"
-description = "Dependency Graph Traversal Package"
+description = "Dependency Graph Resolution Package"
 authors = ["Muhammad Hassan Ahmed"]
 readme = "README.md"
 packages = [{include = "dep_graph"}]
