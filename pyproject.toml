@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "dep-graph-hassan
+name = "dep-graph-hassan"
 version = "0.1.0"
 description = "Dependency Graph Resolution Package"
 authors = ["Muhammad Hassan Ahmed"]
