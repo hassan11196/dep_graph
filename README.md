@@ -1,39 +1,57 @@
 # dep_graph
 
-Simple python package to generate dependency graph from given json file.
+A simple Python package for generating resolved dependency graphs from JSON files.
 
-## Run module
+## Running the Module
+
+To run the module, use the following command:
 
     python -m dep_graph
 
-  By default it reads from `/tmp/deps.json`
+By default, the module will read the dependencies from `/tmp/deps.json`.
 
-## Run module with given path to package dependencie  
+To specify a different path to the dependencies, use the following command:
 
     python -m dep_graph  --path ./some_fir/deps.json
 
-## Create dummy dependency json dummy file
+## Creating a Dummy Dependency JSON File
+
+To create a dummy dependency JSON file, use the following command:
 
     python dep_graph/helper/create_dummy_file.py --path ./tests test_file.json
 
  By default it outputs to `/tmp/deps.json`
   
-## Run Tests
+## Running Tests
+
+To run the tests, use the following command:
 
     python -m unittest discover tests/
 
-## Create package build wiih setup.py
+## Building the Package
 
-    python setup.py sdist bdist_wheel
+You can build the package using either poetry or setup.py.
 
-## Create Virtual Environment with poetry
+### Method 1: Using Poetry
 
-    poetry install
+To build the package using poetry, use the following commands:
 
-## Create Build for package
+1. Create a virtual environment:
 
-    poetry build
+        poetry install
 
-## install pre-commit hooks
+2. Build the package:
+
+        poetry build
+
+### Method 2: Using setup.py
+
+To build the package using setup.py, use the following command:
+
+        python setup.py sdist bdist_wheel
+
+## Installing Pre-commit Hooks
+
+To install pre-commit hooks, use the following command:
 
     pre-commit install
