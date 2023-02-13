@@ -4,7 +4,6 @@ import unittest
 from dep_graph.graph_resolver import DependencyResolver
 from dep_graph.exceptions import CircularDependencyException, MissingDependencyException
 
-
 BASE_PATH = os.path.dirname(os.path.abspath(__file__))
 
 

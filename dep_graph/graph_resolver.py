@@ -10,25 +10,27 @@
 """
 import os
 import json
+import pathlib
 
 from .exceptions import MissingDependencyException, CircularDependencyException
+from .types import UnresolvedGraph, ResolvedGraph, PackageStates
 
 
 class DependencyResolver(object):
     """DependencyResolver class to resolve package dependency graphs.
 
     """
-    def __init__(self, deps_path):
+
+    def __init__(self, deps_path: pathlib.Path):
         self.deps_path = deps_path
-        self.unresolved_graph = {}
-        self.resolved_graph = {}
+        self.unresolved_graph: UnresolvedGraph = {}
+        self.resolved_graph: ResolvedGraph = {}
+
         if not os.path.exists(deps_path):
             raise FileNotFoundError(f"file at {deps_path} does not exists.")
 
-    def _resolve_package_dependencies(self, package):
-        if self.unresolved_graph[package] == {}:
-            self.resolved_graph[package] = {}
-            return []
+    def _resolve_package_dependencies(self, package: str) -> ResolvedGraph:
+        """Resolves the dependencies of a given package."""
 
         if self.resolved_graph.get(package) is None:
             self.resolved_graph[package] = {p: self._resolve_package_dependencies(
@@ -36,13 +38,13 @@ class DependencyResolver(object):
 
         return self.resolved_graph[package]
 
-    def load_dependency_graph(self):
+    def load_dependency_graph(self) -> None:
         """Loads Unresolved dependency graph from path given at object instantiation.
         """
         with open(self.deps_path, encoding='UTF-8') as deps_file:
             self.unresolved_graph = json.load(deps_file)
 
-    def resolve_dependency_graph(self):
+    def resolve_dependency_graph(self) -> ResolvedGraph:
         """Resolves the dependency graph and returns a resolved dependency graph.
 
         Raises:
@@ -50,7 +52,7 @@ class DependencyResolver(object):
                 raised when theres a circular dependency present inside the given dependency graph.
 
         Returns:
-            _type_: dict
+            ResolvedGraph: resolved dependency graph.
         """
         self.load_dependency_graph()
         if self.circular_dependency_check():
@@ -63,7 +65,20 @@ class DependencyResolver(object):
 
         return self.resolved_graph
 
-    def _package_depenencies_contain_cycle(self, package, states):
+    def _package_depenencies_contain_cycle(self, package: str, states: PackageStates) -> bool:
+        """Checks if the given package has any circular dependencies.
+
+        Args:
+            package (str): package to check for circular dependencies.
+            states (PackageStates): dictionary to keep track of package states.
+
+        Raises:
+            MissingDependencyException: 
+                raised when the given package is not present in the dependency graph.
+
+        Returns:
+            bool: True if cycle is present, False otherwise.
+        """
         if package not in states:
             states[package] = 'resolving'
 
@@ -82,13 +97,13 @@ class DependencyResolver(object):
 
         return False
 
-    def circular_dependency_check(self):
+    def circular_dependency_check(self) -> bool:
         """Checks if the given dependency graph has any circular dependencies.
 
         Returns:
-            _type_: bool
+            bool: True if circular dependency is present, False otherwise.
         """
-        states = {}
+        states: PackageStates = {}
         for package in self.unresolved_graph:
             if self._package_depenencies_contain_cycle(package, states):
                 return True
