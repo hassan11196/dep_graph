@@ -16,4 +16,3 @@ if __name__ == '__main__':
     resolved_graph = dependency_resolver.resolve_dependency_graph()
     graph_visualizer = CLIGraphVisualizer()
     graph_visualizer.visualize_dependency_graph(resolved_graph)
-
