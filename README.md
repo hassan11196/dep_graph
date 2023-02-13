@@ -1,5 +1,7 @@
 # dep_graph
 
+[![PyPI version](https://badge.fury.io/py/dep_graph.svg)](https://pypi.org/project/dep_graph_hassan/)
+
 A simple Python package for generating resolved dependency graphs from JSON files.
 
 ## Running the Module
