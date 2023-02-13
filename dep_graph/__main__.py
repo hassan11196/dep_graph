@@ -1,6 +1,7 @@
 import argparse
-from .graph_resolver import DependencyResolver
+from .graph_resolver import reconstruct_full_dependency_graph
 from .visualizations import CLIGraphVisualizer
+
 
 
 if __name__ == '__main__':
@@ -12,7 +13,6 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     deps_file_path = args.path
-    dependency_resolver = DependencyResolver(deps_file_path)
-    resolved_graph = dependency_resolver.resolve_dependency_graph()
+    resolved_graph = reconstruct_full_dependency_graph(deps_file_path)
     graph_visualizer = CLIGraphVisualizer()
     graph_visualizer.visualize_dependency_graph(resolved_graph)

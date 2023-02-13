@@ -108,3 +108,10 @@ class DependencyResolver(object):
             if self._package_depenencies_contain_cycle(package, states):
                 return True
         return False
+
+def reconstruct_full_dependency_graph(deps_file_path):
+    """Reconstructs the full dependency graph from the dependency file.
+    """
+    dependency_resolver = DependencyResolver(deps_file_path)
+    resolved_graph = dependency_resolver.resolve_dependency_graph()
+    return resolved_graph
